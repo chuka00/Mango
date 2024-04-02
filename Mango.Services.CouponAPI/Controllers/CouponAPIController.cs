@@ -73,25 +73,6 @@ namespace Mango.Services.CouponAPI.Controllers
                 _response.Message = ex.Message;
             }
             return _response;
-
-            /*        [HttpGet("{id}", Name = "GetCouponById")]
-                    public ActionResult<Coupon> GetCouponById(int id)
-                    {
-                        try
-                        {
-                            Coupon couponCode = _db.Coupons.FirstOrDefault(u => u.CouponId == id);
-                            if (couponCode == null)
-                            {
-                                return NotFound();
-                            }
-                            return Ok(couponCode);
-                        }
-                        catch (Exception ex)
-                        {
-                            // Log the exception
-                            return StatusCode(500, "Internal server error");
-                        }
-                    }*/
         }
 
     }
