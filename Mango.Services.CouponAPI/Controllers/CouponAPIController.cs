@@ -28,7 +28,7 @@ namespace Mango.Services.CouponAPI.Controllers
             {
                 IEnumerable<Coupon> CouponList = _db.Coupons.ToList();
                 _response.Result = _mapper.Map<IEnumerable<CouponDto>>(CouponList);
-               
+
             }
             catch (Exception ex)
             {
@@ -37,10 +37,10 @@ namespace Mango.Services.CouponAPI.Controllers
             }
             return _response;
         }
-        
 
-        [HttpGet("{id}", Name ="GetCouponById")]
-        public ResponseDto GetCouponById (int id)
+
+        [HttpGet("{id}", Name = "GetCouponById")]
+        public ResponseDto GetCouponById(int id)
         {
             try
             {
@@ -53,63 +53,46 @@ namespace Mango.Services.CouponAPI.Controllers
                 _response.IsSuccess = false;
                 _response.Message = ex.Message;
             }
-            return _response; 
+            return _response;
         }
-/*        [HttpGet("{id}", Name = "GetCouponById")]
-        public ActionResult<Coupon> GetCouponById(int id)
+
+        //[HttpGet("code/{couponCode}", Name = "GetCouponByCode")]
+        [HttpGet]
+        [Route("GetByCode/{code}")]
+        public ResponseDto GetCouponByCode(string code)
         {
             try
             {
-                Coupon coupon = _db.Coupons.FirstOrDefault(u => u.CouponId == id);
-                if (coupon == null)
-                {
-                    return NotFound();
-                }
-                return Ok(coupon);
+                Coupon couponCode = _db.Coupons.FirstOrDefault(u => u.CouponCode.ToLower() == code.ToLower());
+
+                _response.Result = _mapper.Map<CouponDto>(couponCode);
             }
             catch (Exception ex)
             {
-                // Log the exception
-                return StatusCode(500, "Internal server error");
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
             }
-        }*/
-        /*public object Get(int id)
-     {
-         try
-         {
-             Coupon CouponList = _db.Coupons.First(u=>u.CouponId == id);
-            // Coupon object = _db.Coupons.Find(id);
-             // var product = _productRepo.GetQueryable(p => p.UserId.ToString() == userId.ToString()).OrderBy(i => i.ProductId);
+            return _response;
 
-             return CouponList;
-         }
-         catch (Exception ex)
-         {
+            /*        [HttpGet("{id}", Name = "GetCouponById")]
+                    public ActionResult<Coupon> GetCouponById(int id)
+                    {
+                        try
+                        {
+                            Coupon couponCode = _db.Coupons.FirstOrDefault(u => u.CouponId == id);
+                            if (couponCode == null)
+                            {
+                                return NotFound();
+                            }
+                            return Ok(couponCode);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Log the exception
+                            return StatusCode(500, "Internal server error");
+                        }
+                    }*/
+        }
 
-         }
-         return null;*/
     }
-
-
-    /* [HttpGet]
-     public object Get()
-     {
-         try
-         {
-             IEnumerable<Coupon> CouponList = _db.Coupons.ToList();
-             return CouponList;
-         }
-         catch (Exception ex)
-         {
-
-         }
-         return null;
-     }
-
-     [HttpGet]
-     [Route("{id: int}")]
-     
-     }*/
-
 }
-
