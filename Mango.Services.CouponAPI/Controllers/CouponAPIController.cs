@@ -64,8 +64,29 @@ namespace Mango.Services.CouponAPI.Controllers
             try
             {
                 Coupon couponCode = _db.Coupons.FirstOrDefault(u => u.CouponCode.ToLower() == code.ToLower());
-
+                if (couponCode == null)
+                {
+                    _response.IsSuccess = false;
+                }
                 _response.Result = _mapper.Map<CouponDto>(couponCode);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+        [HttpPost]
+        public ResponseDto CreateCoupon([FromBody] CouponDto couponDto)
+        {
+            try
+            {
+                Coupon obj = _mapper.Map<Coupon>(couponDto);
+                _db.Coupons.Add(obj);
+                _db.SaveChanges();
+
+                _response.Result = _mapper.Map<CouponDto>(obj);
             }
             catch (Exception ex)
             {
