@@ -1,5 +1,8 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Service.IService;
+using Newtonsoft.Json;
+using System.Text;
+using static Mango.Web.Utility.SD;
 
 namespace Mango.Web.Service
 {
@@ -22,6 +25,20 @@ namespace Mango.Web.Service
             //Token
 
             message.RequestUri = new Uri(requestDto.Url);
+            if (requestDto.Data != null)
+            {
+                message.Content = new StringContent(JsonConvert.SerializeObject(requestDto.Data), Encoding.UTF8, "application/json");
+            }
+
+            HttpResponseMessage? apiResponse = null;
+
+            switch (requestDto.ApiType)
+            {
+                case ApiType.POST:
+                    message.Method = HttpMethod.Post;
+                    break;
+            }
         }
+        
     }
 }
