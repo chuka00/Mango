@@ -15,12 +15,21 @@ namespace Mango.Web.Service
         }
         public async Task<ResponseDto> CreateCouponsAsync(CouponDto couponDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto
+            {
+                ApiType = SD.ApiType.POST,
+                Data=couponDto,
+                Url = SD.CouponApiBase + "/api/coupon/"
+            });
         }
 
         public async Task<ResponseDto> DeleteCouponsAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto
+            {
+                ApiType = SD.ApiType.DELETE,
+                Url=SD.CouponApiBase+"/api/coupon/" + id
+            });
         }
 
         public async Task<ResponseDto> GetAllCouponsAsync()
@@ -43,7 +52,11 @@ namespace Mango.Web.Service
 
         public async Task<ResponseDto> GetCouponByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto
+            {
+                ApiType = SD.ApiType.GET,
+                Url = SD.CouponApiBase + "/api/coupon/GetByCode/" + id
+            });
         }
 
         public async Task<ResponseDto> UpdateCouponsAsync(CouponDto couponDto)
