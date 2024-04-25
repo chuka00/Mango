@@ -14,13 +14,22 @@ namespace Mango.Services.AuthAPI.Controllers
 
         public AuthAPI(IAuthService authService)
         {
-            
+            _authService = authService;
+            _response = new();
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register([FromBody] RegistrationRequestDto model)
         {
-            return Ok();
+            var errorMessage = await _authService.Register(model);
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                _response.IsSuccess = false;
+                _response.Message = errorMessage;
+                return BadRequest(_response);
+            }
+
+                return Ok(_response);
         }
 
         [HttpPost("login")]
