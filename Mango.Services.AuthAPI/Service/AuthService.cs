@@ -22,6 +22,12 @@ namespace Mango.Services.AuthAPI.Service
             _userManager = userManager;
             _roleManager = roleManager;
         }
+
+        public Task<bool> AssignRole(string email, string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
             var user = _db.ApplicationUsers.FirstOrDefault(u => u.UserName.ToLower() == loginRequestDto.UserName.ToLower());
