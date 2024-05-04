@@ -22,14 +22,26 @@ namespace Mango.Web.Service
             });
         }
 
-        public Task<ResponseDto?> LoginAsync(LoginRequestDto loginRequestDto)
+        public async Task<ResponseDto?> LoginAsync(LoginRequestDto loginRequestDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = loginRequestDto,
+                Url = SD.AuthAPIBase + "/api/auth/login"
+            });
+            //, withBearer: false);
         }
 
-        public Task<ResponseDto?> RegisterAsync(RegistrationRequestDto registrationRequestDto)
+        public async Task<ResponseDto?> RegisterAsync(RegistrationRequestDto registrationRequestDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = registrationRequestDto,
+                Url = SD.AuthAPIBase + "/api/auth/register"
+            });
+            //, withBearer: false);
         }
     }
 }
