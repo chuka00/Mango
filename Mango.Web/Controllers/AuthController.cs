@@ -25,5 +25,9 @@ namespace Mango.Web.Controllers
         {
             return View();
         }
+        public IActionResult LogOut()
+        {
+            return View();
+        }
     }
 }
