@@ -97,15 +97,15 @@ namespace Mango.Web.Controllers
         }
 
 
-        /*public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
             _tokenProvider.ClearToken();
             return RedirectToAction("Index", "Home");
-        }*/
+        }
 
 
-        /*private async Task SignInUser(LoginResponseDto model)
+        private async Task SignInUser(LoginResponseDto model)
         {
             var handler = new JwtSecurityTokenHandler();
 
@@ -129,6 +129,6 @@ namespace Mango.Web.Controllers
 
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-        }*/
+        }
     }
 }
