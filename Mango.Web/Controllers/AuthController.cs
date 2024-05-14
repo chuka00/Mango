@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Mango.Web.Controllers
 {
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
+        private readonly ITokenProvider _tokenProvider;
+
 
         public AuthController(IAuthService authService, ITokenProvider tokenProvider)
         {
