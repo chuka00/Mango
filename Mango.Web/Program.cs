@@ -35,7 +35,6 @@ namespace Mango.Web
                 options.AccessDeniedPath = "/Auth/AccessDenied";
             });
 
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
